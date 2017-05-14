@@ -12,6 +12,10 @@ function update (element, content, klass) {
 var $question = document.getElementById("question");
 var $score = document.getElementById("score");
 var $feedback = document.getElementById("feedback");
+var $start = document.getElementById("start");
+
+// Event listeners //
+$start.addEventListener('click', function() { play(quiz) }, false);
 
 var quiz = {
 	"name":"Super Hero Neme Quiz",
@@ -23,6 +27,7 @@ var quiz = {
 		{ "question":"Bataman", "answer":"Bruce Wayne" }
 	]
 }
+
 
 
 var score = 0; // Initialize score
