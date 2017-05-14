@@ -17,26 +17,28 @@ function play(quiz) {
 	check(answer);
 	} // end of main game loop
 	gameOver();
-}
 
-function ask(question) {
+	function ask(question) {
 	return prompt(question);
-}
+	}
 
-function check(answer) {
+	function check(answer) {
 	if (answer === quiz[i][1]) { // quiz[i][1] is the ith answer
 		alert("Correct!");
 
 		score++;
 	} else {
 		alert("Wrong!");
+		}
+	}
+
+	function gameOver() {
+	// inform the player that the game has finished and tell them
+	// how many points they have scored
+	alert("Game Over, you scored " + score + " points");
 	}
 }
 
-function gameOver() {
-	// inform the player that the game has finished and tell them
-	// how many points they have scored
-	alert("Game Over, you scored " + score + "points");
 
-}
+
 
