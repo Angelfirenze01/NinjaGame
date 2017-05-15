@@ -13,6 +13,7 @@ var $question = document.getElementById("question");
 var $score = document.getElementById("score");
 var $feedback = document.getElementById("feedback");
 var $start = document.getElementById("start");
+var $form = document.getElementById("answer");
 
 // Event listeners //
 $start.addEventListener('click', function() { play(quiz) }, false);
@@ -34,22 +35,43 @@ var score = 0; // Initialize score
 
 update($score, score);
 
-play(quiz);
+// play(quiz);
+
+// these functions help us to hide or display element //
+function hide(element) {
+	element.style.display = "none";
+}
+
+function show(element) {
+	element.style.display = "block";
+}
+
+// hide the form at the begining of the game
+hide($form);
 
 function play(quiz) {
-	// main game loop
-	for (var i = 0, question, answer, max=quiz.questions.length; i < max; i++) {
+	// hide button and show form
+	hide($start);
+	show($form);
 
-	question = quiz.questions[i].question;
-	answer = ask(question);
-	check(answer);
-	} // end of main game loop
+	$form.addEventListener('submit', function(e) {
+		e.preventDefault();
+		check($form[0].value);
+	}, false);
 
-	gameOver();
+	var i = 0;
+
+	chooseQuestion();
+
+	function chooseQuestion() {
+		var question = quiz.questions[i].question;
+		ask(question);
+	}
 
 	function ask(question) {
 		update($question, quiz.question + question);
-		return prompt("Enter your answer:");
+		$form[0].value = "";
+		$form[0].focus();
 	}
 
 	function check(answer) {
@@ -61,12 +83,22 @@ function play(quiz) {
 	} else {
 		update($feedback, "Wrong!", "wrong");
 		}
+
+	i++;
+	if (i === quiz.questions.length) {
+		gameOver();
+	} else {
+		chooseQuestion()
+	};
 	}
 
 	function gameOver() {
 	// inform the player that the game has finished and tell them
 	// how many points they have scored
 	update($question, "Game Over, you scored " + score + " points");
+	
+	hide($form);
+	show($start);
 	}
 }
 

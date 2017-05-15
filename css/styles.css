@@ -33,10 +33,23 @@ section p { /* layout for the section*/
 	color: #600;
 }
 
-button { /* layout for the button*/
+input, button { /* layout for the button*/
 	font: bold 24px/150% Arial, Helvetica, sans-serif;
 	display: block;
 	padding: 10px;
 	margin: 10px auto;
 	width: 300px;
+	background: #203;
+	color: grey;
+}
+
+body {
+	width: 400px;
+	margin: 0 auto;
+	background: #fff;
+	height: 100vh;
+}
+
+html {
+	background: #444;
 }
