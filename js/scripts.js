@@ -14,6 +14,8 @@ var $score = document.getElementById("score");
 var $feedback = document.getElementById("feedback");
 var $start = document.getElementById("start");
 var $form = document.getElementById("answer");
+var $timer = document.getElementById("timer");
+
 
 // Event listeners //
 $start.addEventListener('click', function() { play(quiz) }, false);
@@ -50,6 +52,11 @@ function show(element) {
 hide($form);
 
 function play(quiz) {
+	// initialize timer and set up an interval that counts down
+	var time = 20;
+	update($timer, time);
+	var interval = window.setInterval( countDown, 1000 );
+
 	// hide button and show form
 	hide($start);
 	show($form);
@@ -99,6 +106,21 @@ function play(quiz) {
 	
 	hide($form);
 	show($start);
+
+	// stop the countdown interval
+	window.clearInterval(interval);
+	}
+
+	// this is called every second and decreases the time
+	function countDown() {
+		// decrease time by 1
+		time--;
+		// update the time displayed
+		update($timer, time);
+		// the game is over if the timer has reached 0
+		if (time <= 0) {
+			gameOver();
+		}
 	}
 }
 
